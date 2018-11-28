@@ -1,6 +1,6 @@
 package scipy
 
-// #cgo LDFLAGS: -lndimage
+// #cgo LDFLAGS: -lgoscipy
 // #include "c/ndimage.h"
 import "C"
 import (

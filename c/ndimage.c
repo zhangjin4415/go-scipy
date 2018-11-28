@@ -1,11 +1,4 @@
-#include <stdio.h>
-
 #include "Python.h"
-
-// including `nd_image.h` before `numpy/ndarrayobject.h` is crucial.
-// refer to https://docs.scipy.org/doc/numpy/reference/c-api.array.html?highlight=import_array#c.PY_ARRAY_UNIQUE_SYMBOL
-#include "nd_image.h"
-#include "numpy/ndarrayobject.h"
 
 #include "ni_support.h"
 #include "ni_interpolation.h"
@@ -15,9 +8,6 @@
 // python source: https://github.com/scipy/scipy/blob/maintenance/1.1.x/scipy/ndimage/interpolation.py#L515
 // which essentially uses the C method at https://github.com/scipy/scipy/blob/maintenance/1.1.x/scipy/ndimage/src/ni_interpolation.c#L573
 void resize3d(double *in, int d_in, int h_in, int w_in, int mode, int d_out, int h_out, int w_out, long long *out) {
-    Py_Initialize();
-    _import_array();
-
     // spline filter the input image for order 3 by default
     // refer to https://github.com/scipy/scipy/blob/maintenance/1.1.x/scipy/ndimage/interpolation.py#L570
     npy_intp dims[3] = {d_in, w_in, h_in};
@@ -41,5 +31,4 @@ void resize3d(double *in, int d_in, int h_in, int w_in, int mode, int d_out, int
     PyArrayObject *pyout = (PyArrayObject *)PyArray_SimpleNewFromData(3, out_dims, NPY_LONGLONG, out);
 
     NI_ZoomShift(pyin, zoom_arr, NULL, pyout, 3, mode, 0);
-    Py_Finalize();
 }

@@ -15,7 +15,7 @@ scipy:
 		-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION \
 		-shared \
 		-fPIC \
-		-o libndimage.so
+		-o libgoscipy.so
 
 clean:
 	rm scipy-$(SCIPY_VERSION).tar.gz
