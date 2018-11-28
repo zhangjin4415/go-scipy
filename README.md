@@ -6,10 +6,4 @@ To use the package, firstly run
 make
 ```
 
-which will download scipy source code, and then compile a `libndimage.so` shared libary in the current directory.
-
-Then, move the library to somewhere the linker can find, e.g.
-
-```
-sudo ln libndimage.so /usr/local/lib/libndimage.so
-```
+which will download scipy source code, and then compile a `libndimage.so` shared libary in the current directory. Then, move the library to somewhere the linker can find, e.g. link to `/usr/local/lib`.
